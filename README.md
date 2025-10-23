@@ -1,39 +1,3 @@
-
-# User-specific files
-*.user
-*.rsuser
-*.suo
-*.cache
-*.pdb
-*.vscode/
-.vs/
-
-# Logs
-*.log
-
-# Publish outputs
-**/publish/
-
-# Resharper / Rider
-_ReSharper*/
-*.DotSettings.user
-
-# NuGet packages
-*.nupkg
-packages/
-.nuget/
-
-# Local tools
-.dotnet/
-
-# OS generated files
-.DS_Store
-Thumbs.db
-README.md
-+137
--1
-
-# uchetonline
 # Учет Онлайн
 
 Многофункциональная ERP-система «Учет Онлайн» с настольным интерфейсом WPF, построенная на .NET 8 и PostgreSQL. Приложение включает набор модулей (Склад, Бухгалтерия, Продажи, Закупки, Кадры, Зарплата, Производство, CRM, Справочники, НСИ, Планы обмена, Отчёты, интеграция с «Честным Знаком» и др.) и реализует архитектуру, готовую к расширению.
