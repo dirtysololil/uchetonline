@@ -44,13 +44,13 @@ psql -U postgres -c "CREATE DATABASE uchetonline;"
 
 ```bash
 cd src/UchetOnline.App
- dotnet tool install --global dotnet-ef # при необходимости один раз
- dotnet ef database update --project ../UchetOnline.Infrastructure/UchetOnline.Infrastructure.csproj --startup-project UchetOnline.App.csproj --context UchetOnline.Infrastructure.Data.UchetOnlineContext
+
 ```
 
 (Контекст и миграции находятся в проекте `UchetOnline.Infrastructure`.)
 
 4. Настройте строку подключения в `src/UchetOnline.App/appsettings.json` или через переменные окружения (`Database:ConnectionString`).
+
 
 ## Запуск приложения
 
