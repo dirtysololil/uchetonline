@@ -44,96 +44,13 @@ psql -U postgres -c "CREATE DATABASE uchetonline;"
 
 ```bash
 cd src/UchetOnline.App
-dotnet tool install --global dotnet-ef # при необходимости один раз
-dotnet ef database update --project ../UchetOnline.Infrastructure/UchetOnline.Infrastructure.csproj --startup-project UchetOnline.App.csproj --context UchetOnline.Infrastructure.Data.UchetOnlineContext
+
 ```
 
 (Контекст и миграции находятся в проекте `UchetOnline.Infrastructure`.)
 
 4. Настройте строку подключения в `src/UchetOnline.App/appsettings.json` или через переменные окружения (`Database:ConnectionString`).
 
-Пример строки подключения:
-
-```json
-"Database": {
-  "ConnectionString": "Host=localhost;Port=5432;Database=uchetonline;Username=postgres;Password=MySecurePassword"
-}
-```
-
-Не забудьте заменить пароль на тот, что выбран при установке PostgreSQL.
-
-## Пошаговый запуск на Windows (для новичков)
-
-Ниже приведена инструкция «с нуля», рассчитанная на пользователя без опыта разработки.
-
-1. **Скачайте проект.**
-   - Нажмите зелёную кнопку **Code** на странице репозитория и выберите **Download ZIP**.
-   - Распакуйте архив в удобную папку, например `C:\Projects\UchetOnline`.
-2. **Установите .NET SDK 8.0.**
-   - Перейдите на [официальную страницу загрузки](https://dotnet.microsoft.com/download/dotnet/8.0).
-   - Скачайте установщик `dotnet-sdk-8.0.x-win-x64.exe` и запустите его двойным щелчком.
-   - После установки откройте меню «Пуск», найдите **Командная строка** или **PowerShell** и выполните команду:
-
-     ```powershell
-     dotnet --version
-     ```
-
-     Если выводится номер версии (например, `8.0.100`), всё установлено правильно.
-3. **Установите PostgreSQL.**
-   - Скачайте установщик с [postgresql.org/download](https://www.postgresql.org/download/windows/).
-   - Во время установки запомните пароль пользователя `postgres` и путь установки (по умолчанию `C:\Program Files\PostgreSQL\15\`).
-   - Оставьте галочки на компонентах **pgAdmin** и **Command Line Tools**.
-   - После установки откройте `pgAdmin` → подключитесь к серверу → создайте новую базу с именем `uchetonline` (правый клик по Databases → Create → Database).
-4. **Настройте строку подключения.**
-   - В проводнике найдите файл `src\UchetOnline.App\appsettings.json`.
-   - Откройте его в Блокноте и замените значение `Database:ConnectionString`, указав свой пароль:
-
-     ```json
-     "ConnectionString": "Host=localhost;Port=5432;Database=uchetonline;Username=postgres;Password=ВАШ_ПАРОЛЬ"
-     ```
-
-     Сохраните файл.
-5. **Примените миграции (подготовьте таблицы).**
-   - Откройте меню «Пуск» → **PowerShell** → выполните команды:
-
-     ```powershell
-     cd C:\Projects\UchetOnline\src\UchetOnline.App
-     dotnet tool install --global dotnet-ef
-     dotnet ef database update --project ..\UchetOnline.Infrastructure\UchetOnline.Infrastructure.csproj --startup-project UchetOnline.App.csproj --context UchetOnline.Infrastructure.Data.UchetOnlineContext
-     ```
-
-     При первом запуске `dotnet tool install` установит утилиту миграций. Повторно выполнять команду не потребуется.
-6. **Запустите приложение.**
-   - В том же окне PowerShell выполните:
-
-     ```powershell
-     cd C:\Projects\UchetOnline\src
-     dotnet run --project UchetOnline.App\UchetOnline.App.csproj
-     ```
-
-   - Появится окно входа. Используйте логин `admin` и пароль `admin123!`. При первом запуске администратор будет создан автоматически.
-7. **Создайте исполняемый файл для запуска без PowerShell.**
-   - Выполните публикацию:
-
-     ```powershell
-     dotnet publish UchetOnline.App\UchetOnline.App.csproj -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true
-     ```
-
-   - Готовый `UchetOnline.App.exe` появится в папке `src\UchetOnline.App\bin\Release\net8.0-windows\win-x64\publish`. Создайте ярлык на рабочем столе для удобного запуска.
-8. **(Необязательно) Запустите автоматические тесты.**
-   - В PowerShell выполните:
-
-     ```powershell
-     dotnet test C:\Projects\UchetOnline\src\UchetOnline.sln
-     ```
-
-   - Все тесты работают без подключения к реальной базе данных.
-
-Если при запуске возникают ошибки, проверьте:
-
-- что служба PostgreSQL запущена (значок в `Services.msc` или окно pgAdmin);
-- что строка подключения содержит правильный пароль и порт;
-- что команды выполняются из папки `src` (иначе `dotnet` не найдёт проекты).
 
 ## Запуск приложения
 
